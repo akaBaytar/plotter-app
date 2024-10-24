@@ -1,12 +1,13 @@
-import localFont from 'next/font/local';
+import { Poppins } from 'next/font/google';
+
 import type { Metadata } from 'next';
 
 import '../styles/globals.css';
 
-const geistSans = localFont({
-  src: '../fonts/GeistVF.woff',
-  variable: '--font-geist-sans',
-  weight: '100 900',
+const poppins = Poppins({
+  subsets: ['latin-ext'],
+  fallback: ['Segoe UI', 'Open Sans', 'Helvetica Neue'],
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
 });
 
 export const metadata: Metadata = {
@@ -20,7 +21,7 @@ export const metadata: Metadata = {
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang='en'>
-      <body className={`${geistSans.variable}  antialiased`}>{children}</body>
+      <body className={`${poppins.className} antialiased`}>{children}</body>
     </html>
   );
 };
