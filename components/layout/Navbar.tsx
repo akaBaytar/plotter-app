@@ -17,9 +17,8 @@ const Navbar = () => {
 
   return (
     <div
-      className={cn(
-        'z-50 bg-background dark:bg-primary-foreground fixed top-0 w-full flex items-center p-6',
-        scrolled && 'border-b shadow-sm'
+      className={cn('z-50 dark:bg-primary-foreground fixed top-0 w-full flex items-center p-6',
+        scrolled && 'backdrop-blur bg-background/80 dark:bg-primary-foreground/80'
       )}>
       <Logo />
       <div className='ms-auto w-full flex justify-end items-center gap-2'>

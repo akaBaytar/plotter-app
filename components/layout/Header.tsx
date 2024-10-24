@@ -6,7 +6,6 @@ import { ArrowRight } from 'lucide-react';
 import { useConvexAuth } from 'convex/react';
 import { SignInButton } from '@clerk/clerk-react';
 
-import Spinner from './Spinner';
 import { Button } from '../ui/button';
 
 const Header = () => {
@@ -24,7 +23,7 @@ const Header = () => {
       </h3>
       {isLoading && (
         <div className='w-full flex items-center justify-center'>
-          <Spinner size='lg' />
+          <Button disabled>Get Plotter Free</Button>
         </div>
       )}
       {isAuthenticated && !isLoading && (
@@ -37,7 +36,7 @@ const Header = () => {
       )}
       {!isAuthenticated && !isLoading && (
         <SignInButton mode='modal'>
-          <Button>Get Plotter for Free</Button>
+          <Button>Get Plotter Free</Button>
         </SignInButton>
       )}
     </header>
