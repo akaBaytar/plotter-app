@@ -17,19 +17,23 @@ const Navbar = () => {
 
   return (
     <div
-      className={cn('z-50 dark:bg-primary-foreground fixed top-0 w-full flex items-center p-6',
-        scrolled && 'backdrop-blur bg-background/80 dark:bg-primary-foreground/80'
+      className={cn(
+        'z-50 dark:bg-primary-foreground fixed top-0 w-full flex items-center p-6',
+        scrolled &&
+          'backdrop-blur bg-background/80 dark:bg-primary-foreground/80'
       )}>
-      <Logo />
-      <div className='ms-auto w-full flex justify-end items-center gap-2'>
-        {isLoading && <Spinner size='lg' />}
-        {!isAuthenticated && !isLoading && (
-          <SignInButton mode='modal'>
-            <Button variant='outline'>Login</Button>
-          </SignInButton>
-        )}
-        {isAuthenticated && !isLoading && <UserButton />}
-        <ModeToggle />
+      <div className='container mx-auto flex items-center justify-between'>
+        <Logo />
+        <div className='ms-auto w-full flex justify-end items-center gap-2'>
+          {isLoading && <Spinner size='lg' />}
+          {!isAuthenticated && !isLoading && (
+            <SignInButton mode='modal'>
+              <Button variant='outline'>Login</Button>
+            </SignInButton>
+          )}
+          {isAuthenticated && !isLoading && <UserButton />}
+          <ModeToggle />
+        </div>
       </div>
     </div>
   );
