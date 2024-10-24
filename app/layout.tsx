@@ -1,5 +1,6 @@
 import { Poppins } from 'next/font/google';
 
+import ConvexProvider from '@/components/providers/Convex';
 import ThemeProvider from '@/components/theme/ThemeProvider';
 
 import type { Metadata } from 'next';
@@ -24,14 +25,16 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang='en' suppressHydrationWarning>
       <body className={`${poppins.className} antialiased`}>
-        <ThemeProvider
-          defaultTheme='system'
-          attribute='class'
-          storageKey='plotter-theme'
-          enableSystem
-          disableTransitionOnChange>
-          {children}
-        </ThemeProvider>
+        <ConvexProvider>
+          <ThemeProvider
+            defaultTheme='system'
+            attribute='class'
+            storageKey='plotter-theme'
+            enableSystem
+            disableTransitionOnChange>
+            {children}
+          </ThemeProvider>
+        </ConvexProvider>
       </body>
     </html>
   );
