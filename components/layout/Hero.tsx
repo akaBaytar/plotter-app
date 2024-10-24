@@ -9,28 +9,28 @@ const Hero = () => {
           alt='a man and papers'
           width={320}
           height={320}
-          className='object-contain block dark:hidden'
+          className='object-contain block dark:hidden h-auto w-auto'
         />
         <Image
           src='/documents-dark.png'
           alt='a man and papers'
           width={320}
           height={320}
-          className='object-contain hidden dark:block'
+          className='object-contain hidden dark:block h-auto w-auto'
         />
         <Image
           src='/reading.png'
           alt='a man sitting chair and reading book'
           width={320}
           height={320}
-          className='object-contain hidden md:block dark:hidden'
+          className='object-contain hidden md:block dark:hidden h-auto w-auto'
         />
         <Image
           src='/reading-dark.png'
           alt='a man sitting chair and reading book'
           width={320}
           height={320}
-          className='object-contain hidden dark:md:block'
+          className='object-contain hidden dark:md:block h-auto w-auto'
         />
       </div>
     </div>
