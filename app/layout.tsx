@@ -1,5 +1,7 @@
 import { Poppins } from 'next/font/google';
 
+import { Toaster } from 'sonner';
+
 import ConvexProvider from '@/components/providers/Convex';
 import ThemeProvider from '@/components/theme/ThemeProvider';
 
@@ -32,6 +34,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
             storageKey='plotter-theme'
             enableSystem
             disableTransitionOnChange>
+            <Toaster position='bottom-center' />
             {children}
           </ThemeProvider>
         </ConvexProvider>
