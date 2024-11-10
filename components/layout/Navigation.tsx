@@ -4,9 +4,20 @@
 import { useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
 
-import { ChevronLeft, MenuIcon } from 'lucide-react';
+import { toast } from 'sonner';
 import { useMediaQuery } from 'usehooks-ts';
+import {
+  ChevronLeft,
+  MenuIcon,
+  PlusCircle,
+  Search,
+  Settings,
+} from 'lucide-react';
 
+import { api } from '@/convex/_generated/api';
+import { useMutation, useQuery } from 'convex/react';
+
+import Item from './Item';
 import UserItem from './UserItem';
 
 import { cn } from '@/utils';
@@ -15,10 +26,11 @@ import type { ElementRef } from 'react';
 
 const Navigation = () => {
   const pathname = usePathname();
-
+  const isResizing = useRef(false);
   const isMobile = useMediaQuery('(max-width: 768px)');
 
-  const isResizing = useRef(false);
+  const documents = useQuery(api.documents.get);
+  const create = useMutation(api.documents.create);
 
   const navbar = useRef<ElementRef<'div'>>(null);
   const sidebar = useRef<ElementRef<'aside'>>(null);
@@ -100,6 +112,16 @@ const Navigation = () => {
     }
   };
 
+  const handleCreate = () => {
+    const promise = create({ title: 'Untitled' });
+
+    toast.promise(promise, {
+      loading: 'Creating a new note...',
+      success: 'New note created.',
+      error: 'Failed to create a new note.',
+    });
+  };
+
   return (
     <>
       <aside
@@ -118,11 +140,14 @@ const Navigation = () => {
           )}>
           <ChevronLeft className='h-6 w-6' />
         </div>
-        <div className=''>
+        <div className='flex flex-col gap-1'>
           <UserItem />
+          <Item label='Search' icon={Search} isSearch onClick={() => {}} />
+          <Item label='Settings' icon={Settings} onClick={() => {}} />
+          <Item label='New Document' icon={PlusCircle} onClick={handleCreate} />
         </div>
         <div className='mt-4'>
-          <p>documents</p>
+          {documents?.map((doc) => <p key={doc._id}>{doc.title}</p>)}
         </div>
         <div
           onClick={reset}
