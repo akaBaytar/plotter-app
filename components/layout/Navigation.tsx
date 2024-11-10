@@ -15,10 +15,11 @@ import {
 } from 'lucide-react';
 
 import { api } from '@/convex/_generated/api';
-import { useMutation, useQuery } from 'convex/react';
+import { useMutation } from 'convex/react';
 
 import Item from './Item';
 import UserItem from './UserItem';
+import DocumentList from './DocumentList';
 
 import { cn } from '@/utils';
 
@@ -29,7 +30,6 @@ const Navigation = () => {
   const isResizing = useRef(false);
   const isMobile = useMediaQuery('(max-width: 768px)');
 
-  const documents = useQuery(api.documents.get);
   const create = useMutation(api.documents.create);
 
   const navbar = useRef<ElementRef<'div'>>(null);
@@ -147,7 +147,7 @@ const Navigation = () => {
           <Item label='New Document' icon={PlusCircle} onClick={handleCreate} />
         </div>
         <div className='mt-4'>
-          {documents?.map((doc) => <p key={doc._id}>{doc.title}</p>)}
+          <DocumentList />
         </div>
         <div
           onClick={reset}

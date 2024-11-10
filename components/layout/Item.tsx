@@ -1,8 +1,15 @@
 'use client';
 
-import { ChevronDown, ChevronRight } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+
+import { toast } from 'sonner';
+import { ChevronDown, ChevronRight, PlusIcon } from 'lucide-react';
 
 import { cn } from '@/utils';
+import { Skeleton } from '../ui/skeleton';
+
+import { useMutation } from 'convex/react';
+import { api } from '@/convex/_generated/api';
 
 import type { LucideIcon } from 'lucide-react';
 import type { Id } from '@/convex/_generated/dataModel';
@@ -32,8 +39,36 @@ const Item = ({
   onClick,
   onExpand,
 }: PropTypes) => {
+  const router = useRouter();
+
+  const create = useMutation(api.documents.create);
   const ChevronIcon = expanded ? ChevronDown : ChevronRight;
 
+  const handleExpand = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    e.stopPropagation();
+
+    onExpand?.();
+  };
+
+  const onCreate = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    e.stopPropagation();
+
+    if (!id) return;
+
+    const promise = create({ title: 'Untitled', parentDocument: id }).then(
+      (documentId) => {
+        if (!expanded) onExpand?.();
+
+        router.push(`/documents/${documentId}`);
+      }
+    );
+
+    toast.promise(promise, {
+      loading: 'Creating a new note...',
+      success: 'New note created.',
+      error: 'Failed to create a new note.',
+    });
+  };
   return (
     <div
       onClick={onClick}
@@ -46,8 +81,8 @@ const Item = ({
       {!!id && (
         <div
           role='button'
-          onClick={() => {}}
-          className='h-full rounded-sm hover:bg-neutral-300 dark:bg-neutral-600 me-1'>
+          onClick={handleExpand}
+          className='h-full rounded-sm hover:bg-neutral-300 dark:bg-neutral-600 mx-1'>
           <ChevronIcon className='h-4 w-4 shrink-0 text-muted-foreground/50' />
         </div>
       )}
@@ -62,6 +97,29 @@ const Item = ({
           <span className='text-[9px] mt-[1px]'>⌘</span>K
         </kbd>
       )}
+      {!!id && (
+        <div className='ms-auto flex items-center gap-x-2'>
+          <div
+            role='button'
+            onClick={onCreate}
+            className='opacity-0 group-hover:opacity-100 h-full ms-auto rounded-sm hover:bg-neutral-300 dark:hover:bg-neutral-600'>
+            <PlusIcon className='h-4 w-4 text-muted-foreground' />
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+Item.Skeleton = function ItemSkeleton({ level }: { level?: number }) {
+  return (
+    <div
+      style={{
+        paddingInlineStart: level ? `${level * 13 + 27}px` : '13px',
+      }}
+      className='flex gap-x-1 py-[3px]'>
+      <Skeleton className='h-4 w-4' />
+      <Skeleton className='h-4 w-[30%]' />
     </div>
   );
 };
