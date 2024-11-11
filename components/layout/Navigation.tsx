@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 
 import { toast } from 'sonner';
 import { useMediaQuery } from 'usehooks-ts';
+
 import {
   ChevronLeft,
   MenuIcon,

@@ -62,7 +62,7 @@ const DocumentList = ({ data, level = 0, parentDocumentId }: PropTypes) => {
           expanded && 'last:block',
           level === 0 && 'hidden'
         )}>
-        No pages inside.
+        {level !== 0 && 'No pages inside.'}
       </p>
       {documents.map((doc) => (
         <div key={doc._id}>
