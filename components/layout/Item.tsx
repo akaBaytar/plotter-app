@@ -6,11 +6,11 @@ import { toast } from 'sonner';
 import { useUser } from '@clerk/clerk-react';
 
 import {
+  Archive,
   ChevronDown,
   ChevronRight,
   MoreHorizontal,
   PlusIcon,
-  Trash,
 } from 'lucide-react';
 
 import { cn } from '@/utils';
@@ -39,7 +39,7 @@ type PropTypes = {
   active?: boolean;
   expanded?: boolean;
   isSearch?: boolean;
-  onClick: () => void;
+  onClick?: () => void;
   onExpand?: () => void;
 };
 
@@ -98,8 +98,8 @@ const Item = ({
     const promise = archive({ id });
 
     toast.promise(promise, {
-      loading: 'Moving to trash...',
-      success: 'Note moved to trash.',
+      loading: 'Moving to archive...',
+      success: 'Note moved to archived.',
       error: 'Failed to archive mote.',
     });
   };
@@ -150,8 +150,8 @@ const Item = ({
               <DropdownMenuItem
                 onClick={onArchive}
                 className='cursor-pointer hover:bg-muted'>
-                <Trash className='h-4 w-4' />
-                <span className='text-sm mt-0.5'>Delete</span>
+                <Archive className='h-4 w-4' />
+                <span className='text-sm'>Archive</span>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <div className='text-xs text-muted-foreground p-2 cursor-default'>

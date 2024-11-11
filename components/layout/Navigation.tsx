@@ -8,6 +8,7 @@ import { toast } from 'sonner';
 import { useMediaQuery } from 'usehooks-ts';
 
 import {
+  Archive,
   ChevronLeft,
   MenuIcon,
   PlusCircle,
@@ -15,10 +16,17 @@ import {
   Settings,
 } from 'lucide-react';
 
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+} from '@/components/ui/popover';
+
 import { api } from '@/convex/_generated/api';
 import { useMutation } from 'convex/react';
 
 import Item from './Item';
+import TrashBox from './TrashBox';
 import UserItem from './UserItem';
 import DocumentList from './DocumentList';
 
@@ -149,6 +157,16 @@ const Navigation = () => {
         </div>
         <div className='mt-4'>
           <DocumentList />
+          <Popover>
+            <PopoverTrigger className='w-full mt-4'>
+              <Item label='Archive' icon={Archive} />
+            </PopoverTrigger>
+            <PopoverContent
+              side={isMobile ? 'bottom' : 'right'}
+              className='p-0 w-72'>
+              <TrashBox />
+            </PopoverContent>
+          </Popover>
         </div>
         <div
           onClick={reset}
