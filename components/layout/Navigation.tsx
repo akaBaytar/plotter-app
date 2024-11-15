@@ -2,7 +2,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { usePathname } from 'next/navigation';
+import { usePathname, useParams } from 'next/navigation';
 
 import { toast } from 'sonner';
 import { useMediaQuery } from 'usehooks-ts';
@@ -29,6 +29,7 @@ import Item from './Item';
 import TrashBox from './TrashBox';
 import UserItem from './UserItem';
 import DocumentList from './DocumentList';
+import DocumentDetails from './DocumentDetails';
 
 import { cn } from '@/utils';
 import { useSearch } from '@/hooks/useSearch';
@@ -39,7 +40,10 @@ import type { ElementRef } from 'react';
 const Navigation = () => {
   const search = useSearch();
   const settings = useSettings();
+
+  const params = useParams();
   const pathname = usePathname();
+
   const isResizing = useRef(false);
   const isMobile = useMediaQuery('(max-width: 768px)');
 
@@ -185,15 +189,19 @@ const Navigation = () => {
           isResetting && 'transition-all ease-in-out duration-200',
           isMobile && 'left-0 w-full'
         )}>
-        <nav className='bg-transparent px-4 py-2 w-full'>
-          {isCollapsed && (
-            <MenuIcon
-              role='button'
-              onClick={reset}
-              className='h-6 w-6 text-muted-foreground'
-            />
-          )}
-        </nav>
+        {!!params.id ? (
+          <DocumentDetails isCollapsed={isCollapsed} onResetWidth={reset} />
+        ) : (
+          <nav className='bg-transparent px-4 py-2 w-full'>
+            {isCollapsed && (
+              <MenuIcon
+                role='button'
+                onClick={reset}
+                className='h-6 w-6 text-muted-foreground'
+              />
+            )}
+          </nav>
+        )}
       </div>
     </>
   );

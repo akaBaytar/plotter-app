@@ -72,7 +72,7 @@
 html,
 body,
 :root {
-  @apply h-full dark:bg-primary-foreground overflow-x-hidden
+  @apply h-full dark:bg-primary-foreground overflow-x-hidden;
 }
 
 ::-webkit-scrollbar {
