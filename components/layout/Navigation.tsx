@@ -31,10 +31,12 @@ import UserItem from './UserItem';
 import DocumentList from './DocumentList';
 
 import { cn } from '@/utils';
+import { useSearch } from '@/hooks/useSearch';
 
 import type { ElementRef } from 'react';
 
 const Navigation = () => {
+  const search = useSearch()
   const pathname = usePathname();
   const isResizing = useRef(false);
   const isMobile = useMediaQuery('(max-width: 768px)');
@@ -151,7 +153,7 @@ const Navigation = () => {
         </div>
         <div className='flex flex-col gap-1'>
           <UserItem />
-          <Item label='Search' icon={Search} isSearch onClick={() => {}} />
+          <Item label='Search' icon={Search} isSearch onClick={search.onOpen} />
           <Item label='Settings' icon={Settings} onClick={() => {}} />
           <Item label='New Document' icon={PlusCircle} onClick={handleCreate} />
         </div>
