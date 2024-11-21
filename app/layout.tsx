@@ -6,6 +6,8 @@ import ModalProvider from '@/components/providers/Modal';
 import ConvexProvider from '@/components/providers/Convex';
 import ThemeProvider from '@/components/theme/ThemeProvider';
 
+import { EdgeStoreProvider } from '@/lib/edgestore';
+
 import type { Metadata } from 'next';
 
 import '../styles/globals.css';
@@ -29,16 +31,18 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
     <html lang='en' suppressHydrationWarning>
       <body className={`${poppins.className} antialiased`}>
         <ConvexProvider>
-          <ThemeProvider
-            defaultTheme='system'
-            attribute='class'
-            storageKey='plotter-theme'
-            enableSystem
-            disableTransitionOnChange>
-            <Toaster position='bottom-center' />
-            <ModalProvider/>
-            {children}
-          </ThemeProvider>
+          <EdgeStoreProvider>
+            <ThemeProvider
+              defaultTheme='system'
+              attribute='class'
+              storageKey='plotter-theme'
+              enableSystem
+              disableTransitionOnChange>
+              <Toaster position='bottom-center' />
+              <ModalProvider />
+              {children}
+            </ThemeProvider>
+          </EdgeStoreProvider>
         </ConvexProvider>
       </body>
     </html>

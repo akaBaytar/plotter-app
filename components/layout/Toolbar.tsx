@@ -11,6 +11,8 @@ import { api } from '@/convex/_generated/api';
 import IconPicker from './IconPicker';
 import { Button } from '../ui/button';
 
+import { useCoverImage } from '@/hooks/useCoverImage';
+
 import type { Doc } from '@/convex/_generated/dataModel';
 
 type PropTypes = {
@@ -26,6 +28,8 @@ const Toolbar = ({ initialData, preview }: PropTypes) => {
 
   const update = useMutation(api.documents.update);
   const removeIcon = useMutation(api.documents.removeIcon);
+
+  const coverImage = useCoverImage();
 
   const enable = () => {
     if (preview) return;
@@ -95,7 +99,7 @@ const Toolbar = ({ initialData, preview }: PropTypes) => {
           <Button
             size='sm'
             variant='outline'
-            onClick={() => {}}
+            onClick={coverImage.onOpen}
             className='text-muted-foreground text-xs'>
             <ImageIcon className='h-4 w-4 me-1' />
             Add Cover

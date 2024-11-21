@@ -4,6 +4,7 @@ import { useQuery } from 'convex/react';
 import { api } from '@/convex/_generated/api';
 
 import Toolbar from '@/components/layout/Toolbar';
+import CoverImage from '@/components/layout/CoverImage';
 
 import type { Id } from '@/convex/_generated/dataModel';
 
@@ -26,7 +27,7 @@ const DocumentPage = ({ params }: PropTypes) => {
 
   return (
     <div className='pb-40'>
-      <div className='h-[35vh]' />
+      <CoverImage url={document?.coverImage} />
       <div className='md:max-w-3xl lg:max-w-4xl mx-auto'>
         <Toolbar initialData={document!} />
       </div>
