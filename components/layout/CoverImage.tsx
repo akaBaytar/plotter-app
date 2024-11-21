@@ -9,6 +9,7 @@ import { useMutation } from 'convex/react';
 import { api } from '@/convex/_generated/api';
 
 import { Button } from '../ui/button';
+import { Skeleton } from '../ui/skeleton';
 
 import { cn } from '@/utils';
 import { useEdgeStore } from '@/lib/edgestore';
@@ -63,6 +64,10 @@ const CoverImage = ({ url, preview }: { url?: string; preview?: boolean }) => {
       )}
     </div>
   );
+};
+
+CoverImage.Skeleton = function CoverImageSkeleton() {
+  return <Skeleton className='h-[12vh] w-full'/>;
 };
 
 export default CoverImage;
