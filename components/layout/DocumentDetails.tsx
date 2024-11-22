@@ -7,6 +7,7 @@ import { MenuIcon } from 'lucide-react';
 import Menu from './Menu';
 import Title from './Title';
 import Banner from './Banner';
+import Publish from './Publish';
 
 import { useQuery } from 'convex/react';
 import { api } from '@/convex/_generated/api';
@@ -50,6 +51,7 @@ const DocumentDetails = ({ isCollapsed, onResetWidth }: PropTypes) => {
         <div className='flex items-center justify-between w-full'>
           <Title initialData={document} />
           <div className='flex items-center gap-x-2'>
+            <Publish initialData={document} />
             <Menu id={document._id} />
           </div>
         </div>
