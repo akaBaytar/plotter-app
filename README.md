@@ -4,11 +4,11 @@
 
 ## Live Demo
 
-- You can access the live demo via [Vercel]().
+- You can access the live demo via [Vercel](https://burakbilgili-plotter.vercel.app/).
 
 ## Screen
 
-[<img src="/public/screen.png" />]()
+[<img src="/public/screen.png" />](https://burakbilgili-plotter.vercel.app/)
 
 
 ## Features
