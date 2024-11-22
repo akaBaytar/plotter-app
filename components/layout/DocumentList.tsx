@@ -19,7 +19,7 @@ type PropTypes = {
   data?: Doc<'documents'>[];
 };
 
-const DocumentList = ({ data, level = 0, parentDocumentId }: PropTypes) => {
+const DocumentList = ({ level = 0, parentDocumentId }: PropTypes) => {
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
 
   const params = useParams();
