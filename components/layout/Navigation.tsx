@@ -2,7 +2,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { usePathname, useParams } from 'next/navigation';
+import { usePathname, useParams, useRouter } from 'next/navigation';
 
 import { toast } from 'sonner';
 import { useMediaQuery } from 'usehooks-ts';
@@ -43,6 +43,7 @@ const Navigation = () => {
 
   const params = useParams();
   const pathname = usePathname();
+  const router = useRouter();
 
   const isResizing = useRef(false);
   const isMobile = useMediaQuery('(max-width: 768px)');
@@ -130,7 +131,9 @@ const Navigation = () => {
   };
 
   const handleCreate = () => {
-    const promise = create({ title: 'Untitled' });
+    const promise = create({ title: 'Untitled' }).then((id) =>
+      router.push(`/documents/${id}`)
+    );
 
     toast.promise(promise, {
       loading: 'Creating a new note...',

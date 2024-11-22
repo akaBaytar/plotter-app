@@ -63,7 +63,7 @@ const Toolbar = ({ initialData, preview }: PropTypes) => {
   const onRemoveIcon = () => removeIcon({ id: initialData?._id });
 
   return (
-    <div className='ps-[58px] relative group'>
+    <div className='ps-[53px] relative group'>
       {!!initialData?.icon && !preview && (
         <div className='flex items-center gap-x-2 pt-6 group/icon'>
           <IconPicker onChange={onIconSelect}>
